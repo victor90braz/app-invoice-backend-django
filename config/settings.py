@@ -17,7 +17,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'invoices',
     'corsheaders',
-    'https://victor-braz-app-invoices.netlify.app/'
 ]
 
 MIDDLEWARE = [
