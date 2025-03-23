@@ -30,7 +30,9 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware'
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://victor-braz-app-invoices.netlify.app",
+]
 
 ROOT_URLCONF = 'config.urls'
 
