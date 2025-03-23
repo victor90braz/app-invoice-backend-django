@@ -6,7 +6,7 @@ SECRET_KEY = 'django-insecure-04)#2-)earm=&%humr0i+l4!xos%g6m%58eu6clt!e-q5(-k-9
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['app-invoice-backend-django.onrender.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
