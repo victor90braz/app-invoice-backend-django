@@ -1,16 +1,19 @@
+import os
 from pathlib import Path
 import dj_database_url
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-04)#2-)earm=&%humr0i+l4!xos%g6m%58eu6clt!e-q5(-k-9'
+SECRET_KEY = os.getenv('SECRET_KEY', 'your-default-secret-key')
 
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+
+
+load_dotenv()
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -45,7 +48,6 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-# Extra opcional para desarrollo local
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
 
@@ -69,10 +71,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+# Database Configuration: Local vs. Render
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://postgres:root@localhost:5432/invoice_management_db')
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default="postgresql://postgres:root@localhost:5432/invoice_management_db"
-    )
+    'default': dj_database_url.config(default=DATABASE_URL)
 }
 
 AUTH_PASSWORD_VALIDATORS = [
