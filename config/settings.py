@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 
 SECRET_KEY = os.getenv("SECRET_KEY", "your-default-secret-key")
-DEBUG = os.getenv("DEBUG", "True") == "True"
+DEBUG = os.getenv("DEBUG", "").lower() in ["true", "1"]
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "app-invoice-backend-django.onrender.com,localhost,127.0.0.1").split(",")
 
@@ -69,10 +69,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-# Configuración de la base de datos
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:root@localhost:5432/invoice_management_db")
 DATABASES = {
-    "default": dj_database_url.config(default=DATABASE_URL)
+    "default": dj_database_url.config(
+        default=f"postgres://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
