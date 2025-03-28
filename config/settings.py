@@ -85,5 +85,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://victor-braz-app-invoices.netlify.app",
 ]
 
+
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
