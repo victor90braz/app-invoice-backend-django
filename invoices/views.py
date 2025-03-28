@@ -10,7 +10,11 @@ def invoice_list(request: Request) -> Response:
     invoices = Invoice.objects.order_by('id')
 
     paginator = PageNumberPagination()
-    result_page = paginator.paginate_queryset(invoices, request)
+    page = paginator.paginate_queryset(invoices, request)
 
-    serializer = InvoiceSerializer(result_page, many=True)
-    return paginator.get_paginated_response(serializer.data)
+    if page is not None:
+        serializer = InvoiceSerializer(page, many=True)
+        return paginator.get_paginated_response(serializer.data)
+
+    serializer = InvoiceSerializer(invoices, many=True)
+    return Response(serializer.data)
