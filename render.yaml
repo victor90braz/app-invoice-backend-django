@@ -3,11 +3,11 @@ services:
     name: django-backend
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn config.wsgi:application
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: config.settings
       - key: PYTHON_VERSION
         value: 3.10
       - key: DATABASE_URL
-        sync: false
+        value: postgres://postgres:root@your-database-name.onrender.com:5432/invoice_management_db
